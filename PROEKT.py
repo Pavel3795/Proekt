@@ -1,24 +1,21 @@
-import random
+import discord
+from discord.ext import commands
 
+intents = discord.Intents.default()
+intents.message_content = True
 
-def gen_pass(pass_length):
-    elements = "+-/*!&$#?=@<>"
-    password = ""
+bot = commands.Bot(command_prefix='$', intents=intents)
 
-    for i in range(pass_length):
-        password += random.choice(elements)
+@bot.event
+async def on_ready():
+    print(f'We have logged in as {bot.user}')
 
-    return password
+@bot.command()
+async def hello(ctx):
+    await ctx.send(f'Привет! Всегда следи за природой, не загрязняй её и не позволяй это делать кому то))). 😉')
 
+@bot.command()
+async def heh(ctx, count_heh = 5):
+    await ctx.send("he" * count_heh)
 
-def gen_emodji():
-    emodji = ["\U0001f600", "\U0001f642", "\U0001F606", "\U0001F923"]
-    return random.choice(emodji)
-
-
-def flip_coin():
-    flip = random.randint(0, 2)
-    if flip == 0:
-        return "ОРЕЛ"
-    else:
-        return "РЕШКА"
+bot.run("MTEwOTg0NjkzMDY1NTI4OTM0NA.GKfiEu.EgOY7c5ofX6YP3V_qcMaFDsqoXMez4IoiJJX-Y")
